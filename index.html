@@ -1,30 +1,18 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About The Skies — Cosmic Phenomena</title>
-  <meta name="description" content="An exploration of cosmic phenomena: Supernovas, Black Holes, Spaghettification, and the Multiverse.">
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-
+  <title>About The Skies ? A Comprehensive Survey of Relativistic Astrophysics</title>
+  <meta name="description" content="An academic and observational study on core-collapse supernovas, black hole tidal metrics, and cosmological multiverse topologies.">
   <style>
     :root {
-      --bg: #030712;
-      --card-bg: rgba(15, 23, 42, 0.65);
-      --border: rgba(255, 255, 255, 0.08);
-      --text: #f8fafc;
-      --muted: #94a3b8;
-      --cyan: #38bdf8;
-      --violet: #818cf8;
-      --amber: #fbbf24;
-      --font-display: 'Space Grotesk', sans-serif;
-      --font-body: 'Inter', sans-serif;
+      --bg: #ffffff;
+      --bg-alt: #f5f5f7;
+      --text: #1d1d1f;
+      --text-muted: #86868b;
+      --border: #d2d2d7;
+      --font-stack: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
     }
 
     * {
@@ -33,522 +21,396 @@
       box-sizing: border-box;
     }
 
-    html {
+    body {
       background-color: var(--bg);
       color: var(--text);
-      font-family: var(--font-body);
-      overflow-x: hidden;
-      scroll-behavior: smooth;
+      font-family: var(--font-stack);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
 
-    body {
-      background: radial-gradient(circle at 50% 0%, #0f172a 0%, #030712 70%);
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    /* Fixed Background Starfield Canvas */
-    #starfield {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* Minimal Top Navigation */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 48px;
-      backdrop-filter: blur(16px);
-      background: rgba(3, 7, 18, 0.7);
+    /* Navigation */
+    header {
       border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(20px);
       z-index: 100;
     }
 
-    .nav-brand {
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 1.1rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: #fff;
+    .nav-inner {
+      max-width: 1024px;
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
-    .nav-links {
-      display: flex;
-      gap: 32px;
-      list-style: none;
+    .brand {
+      font-weight: 600;
+      font-size: 17px;
+      letter-spacing: -0.02em;
+      color: var(--text);
     }
 
     .nav-links a {
-      color: var(--muted);
+      color: var(--text-muted);
       text-decoration: none;
-      font-size: 0.9rem;
-      transition: color 0.2s;
+      font-size: 14px;
+      margin-left: 28px;
     }
 
     .nav-links a:hover {
-      color: var(--cyan);
+      color: var(--text);
     }
 
-    /* Sections */
-    section {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 120px 24px;
-      z-index: 1;
-    }
-
+    /* Content Layout */
     .container {
-      width: min(90%, 1100px);
+      max-width: 980px;
       margin: 0 auto;
+      padding: 0 24px;
     }
 
-    .tag {
-      display: inline-block;
-      font-family: var(--font-display);
-      font-size: 0.8rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--cyan);
-      margin-bottom: 16px;
-    }
-
-    h1, h2 {
-      font-family: var(--font-display);
-      font-weight: 700;
-      line-height: 1.1;
-      letter-spacing: -0.5px;
-    }
-
-    h1 {
-      font-size: clamp(3rem, 7vw, 5.5rem);
-      margin-bottom: 24px;
-      background: linear-gradient(180deg, #ffffff 0%, #94a3b8 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    h2 {
-      font-size: clamp(2rem, 4vw, 3.2rem);
-      margin-bottom: 20px;
-    }
-
-    p.lead {
-      font-size: 1.25rem;
-      line-height: 1.7;
-      color: var(--muted);
-      max-width: 640px;
-      font-weight: 300;
-    }
-
-    /* Hero Section */
-    #hero {
+    /* Hero */
+    .hero {
+      padding: 100px 0 70px;
       text-align: center;
-      height: 100vh;
-      overflow: hidden;
+      border-bottom: 1px solid var(--border);
     }
 
-    .hero-portal-ring {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: min(500px, 80vw);
-      height: min(500px, 80vw);
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, rgba(129, 140, 248, 0.08) 50%, transparent 75%);
-      box-shadow: 0 0 100px rgba(56, 189, 248, 0.25), inset 0 0 60px rgba(129, 140, 248, 0.2);
-      border: 1px solid rgba(56, 189, 248, 0.3);
-      z-index: -1;
-      pointer-events: none;
-    }
-
-    /* Grid Layout */
-    .split-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: center;
-    }
-
-    @media (max-width: 868px) {
-      .split-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-      nav {
-        padding: 16px 24px;
-      }
-      .nav-links {
-        display: none;
-      }
-    }
-
-    .card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 36px;
-      backdrop-filter: blur(12px);
-    }
-
-    /* Supernova Visual */
-    .supernova-stage {
-      position: relative;
-      height: 380px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .stellar-core {
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
-      background: radial-gradient(circle, #ffffff 0%, #fbbf24 60%, #ea580c 100%);
-      box-shadow: 0 0 50px rgba(251, 191, 36, 0.6);
-      transition: transform 0.1s;
-    }
-
-    .nebula-ring {
-      position: absolute;
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      border: 2px dashed rgba(251, 191, 36, 0.4);
-      transform: scale(0.8);
-      opacity: 0;
-    }
-
-    /* Black Hole & Spaghettification Visual */
-    .blackhole-stage {
-      position: relative;
-      height: 380px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .accretion-disk {
-      width: 260px;
-      height: 260px;
-      border-radius: 50%;
-      background: radial-gradient(circle, #000000 45%, #818cf8 55%, transparent 70%);
-      box-shadow: 0 0 70px rgba(129, 140, 248, 0.4);
-      border: 1px solid rgba(129, 140, 248, 0.2);
-    }
-
-    .spaghetti-probe {
-      position: absolute;
-      top: 20%;
-      width: 10px;
-      height: 60px;
-      background: linear-gradient(180deg, #38bdf8, transparent);
-      border-radius: 10px;
-      box-shadow: 0 0 20px #38bdf8;
-      transform-origin: center bottom;
-    }
-
-    /* Multiverse Cards */
-    .multiverse-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 24px;
-      margin-top: 48px;
-    }
-
-    .dimension-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 32px;
-      backdrop-filter: blur(12px);
-      transition: transform 0.3s, border-color 0.3s;
-    }
-
-    .dimension-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(56, 189, 248, 0.4);
-    }
-
-    .dim-number {
-      font-family: var(--font-display);
-      font-size: 0.9rem;
-      color: var(--muted);
+    .eyebrow {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
       margin-bottom: 12px;
     }
 
-    .dim-title {
-      font-size: 1.25rem;
+    h1 {
+      font-size: clamp(38px, 6vw, 64px);
       font-weight: 600;
-      margin-bottom: 10px;
+      letter-spacing: -0.025em;
+      line-height: 1.05;
+      margin-bottom: 20px;
+      color: var(--text);
     }
 
-    .dim-desc {
-      color: var(--muted);
-      line-height: 1.6;
-      font-size: 0.95rem;
+    .hero-lead {
+      font-size: 21px;
+      line-height: 1.4;
+      font-weight: 400;
+      color: var(--text-muted);
+      max-width: 720px;
+      margin: 0 auto;
     }
 
-    footer {
+    /* Article Sections */
+    section.topic {
+      padding: 80px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    section.topic:nth-of-type(even) {
+      background-color: var(--bg-alt);
+    }
+
+    .topic-header {
+      margin-bottom: 32px;
+    }
+
+    h2 {
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+
+    .media-frame {
+      margin: 36px 0;
+      background: #000;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .media-frame img {
+      width: 100%;
+      height: auto;
+      max-height: 520px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .media-caption {
+      padding: 14px 20px;
+      background: #fff;
+      font-size: 13px;
+      color: var(--text-muted);
       border-top: 1px solid var(--border);
-      padding: 40px 24px;
+    }
+
+    /* Two-column analysis */
+    .prose-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-top: 28px;
+    }
+
+    @media (max-width: 768px) {
+      .prose-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 1.65;
+      color: #333336;
+      margin-bottom: 16px;
+    }
+
+    /* Data Spec Cards */
+    .metric-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin: 32px 0 16px;
+    }
+
+    .metric-box {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+    }
+
+    .metric-val {
+      font-size: 28px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .metric-lbl {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* Footer */
+    footer {
+      padding: 48px 0;
       text-align: center;
-      color: var(--muted);
-      font-size: 0.9rem;
+      font-size: 13px;
+      color: var(--text-muted);
+      background: #ffffff;
     }
 
     footer a {
-      color: var(--cyan);
-      text-decoration: none;
+      color: var(--text);
+      text-decoration: underline;
+      font-weight: 500;
     }
   </style>
 </head>
 <body>
 
-  <canvas id="starfield"></canvas>
-
-  <nav>
-    <div class="nav-brand">About The Skies</div>
-    <ul class="nav-links">
-      <li><a href="#supernovas">Supernovas</a></li>
-      <li><a href="#blackholes">Black Holes</a></li>
-      <li><a href="#multiverse">Multiverse</a></li>
-      <li><a href="https://github.com/AshKap18/AboutTheSkies" target="_blank">GitHub</a></li>
-    </ul>
-  </nav>
-
-  <!-- Hero -->
-  <section id="hero">
-    <div class="hero-portal-ring" id="heroRing"></div>
-    <div class="container" id="heroContent">
-      <span class="tag">Astronomical Survey</span>
-      <h1>About The Skies</h1>
-      <p class="lead" style="margin: 0 auto;">
-        An exploration of the violent, beautiful, and mind-bending phenomena that govern our universe.
-      </p>
+  <!-- Top Apple-Style Header -->
+  <header>
+    <div class="nav-inner">
+      <div class="brand">About The Skies</div>
+      <div class="nav-links">
+        <a href="#supernovas">Supernovas</a>
+        <a href="#blackholes">Spaghettification</a>
+        <a href="#multiverse">The Multiverse</a>
+        <a href="https://github.com/AshKap18/AboutTheSkies" target="_blank" rel="noopener">GitHub</a>
+      </div>
     </div>
-  </section>
+  </header>
 
-  <!-- Section 1: Supernovas -->
-  <section id="supernovas">
-    <div class="container split-grid">
-      <div>
-        <span class="tag">01 / Stellar Evolution</span>
-        <h2>Supernovas</h2>
-        <div class="card">
-          <p style="color: var(--muted); line-height: 1.8; margin-bottom: 16px;">
-            When a star exceeding eight solar masses exhausts its nuclear fuel, its core can no longer withstand the relentless inward pull of gravity. Within a fraction of a second, the core collapses at nearly a quarter the speed of light.
-          </p>
-          <p style="color: var(--muted); line-height: 1.8;">
-            The resulting shockwave rebounds outward, blasting the star's outer layers into interstellar space. In that solitary instant, the supernova outshines entire galaxies and forges the universe's heaviest elements.
-          </p>
+  <main>
+    <!-- Hero Overview -->
+    <header class="hero">
+      <div class="container">
+        <div class="eyebrow">Observational & Theoretical Astrophysics</div>
+        <h1>About The Skies.</h1>
+        <p class="hero-lead">
+          A definitive inquiry into the thermodynamic collapse of massive stellar cores, relativistic tidal forces at black hole singularities, and higher-dimensional inflationary cosmology.
+        </p>
+      </div>
+    </header>
+
+    <!-- SECTION 1: SUPERNOVAS -->
+    <section class="topic" id="supernovas">
+      <div class="container">
+        <div class="topic-header">
+          <div class="eyebrow">Stellar Nucleosynthesis & Collapse</div>
+          <h2>01. Core-Collapse Supernovas</h2>
         </div>
-      </div>
-      <div class="supernova-stage">
-        <div class="stellar-core" id="starCore"></div>
-        <div class="nebula-ring" id="nebulaRing"></div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Section 2: Black Holes & Spaghettification -->
-  <section id="blackholes">
-    <div class="container split-grid">
-      <div class="blackhole-stage">
-        <div class="accretion-disk" id="blackHole"></div>
-        <div class="spaghetti-probe" id="probe"></div>
-      </div>
-      <div>
-        <span class="tag">02 / Relativistic Gravity</span>
-        <h2>Spaghettification</h2>
-        <div class="card">
-          <p style="color: var(--muted); line-height: 1.8; margin-bottom: 16px;">
-            Near a stellar-mass black hole, gravity changes with extreme rapidity over tiny distances. The gravitational pull on an object's nearest edge is astronomically greater than on its farthest edge.
-          </p>
-          <p style="color: var(--muted); line-height: 1.8;">
-            This extreme tidal differential stretches any matter vertically into an ultra-thin strand while compressing it horizontally. The formal astrophysics term for this vertical stretching is <span style="color: var(--cyan); font-weight: 500;">Spaghettification</span>.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 3: The Multiverse -->
-  <section id="multiverse">
-    <div class="container">
-      <span class="tag">03 / Theoretical Physics</span>
-      <h2>The Cosmic Web & Multiverse</h2>
-      <p class="lead">
-        From cosmic inflation to dark matter filaments, current cosmology suggests our visible universe may be just one membrane in an infinite ensemble.
-      </p>
-
-      <div class="multiverse-grid">
-        <div class="dimension-card">
-          <div class="dim-number">LEVEL I</div>
-          <div class="dim-title">Infinite Hubble Volumes</div>
-          <div class="dim-desc">
-            In an infinite, flat universe, matter must eventually repeat configurations. Far beyond our particle horizon, identical regions of space inevitably exist.
+        <div class="media-frame">
+          <img src="supernova.jpg" alt="NASA Image: Cassiopeia A Supernova Remnant with expanding multi-wavelength blast wave">
+          <div class="media-caption">
+            Figure 1.0 ? NASA Observational Survey: Multi-wavelength remnant of a core-collapse supernova, illustrating the expanding shock boundary and expelled heavy elements into the interstellar medium.
           </div>
         </div>
 
-        <div class="dimension-card">
-          <div class="dim-number">LEVEL II</div>
-          <div class="dim-title">Eternal Inflation</div>
-          <div class="dim-desc">
-            Cosmic inflation doesn't stop everywhere at once. It continuously seeds isolated bubble universes, each potentially with different physical constants.
+        <div class="metric-row">
+          <div class="metric-box">
+            <div class="metric-val">10?? Joules</div>
+            <div class="metric-lbl">Total Mechanical Energy Emitted</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-val">0.23 c</div>
+            <div class="metric-lbl">Infall Velocity of Iron Core</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-val">1.44 M?</div>
+            <div class="metric-lbl">Chandrasekhar Mass Limit</div>
           </div>
         </div>
 
-        <div class="dimension-card">
-          <div class="dim-number">LEVEL III</div>
-          <div class="dim-title">Many-Worlds Hypothesis</div>
-          <div class="dim-desc">
-            In quantum mechanics, every quantum measurement branches reality into parallel, non-communicating branches of a universal wavefunction.
+        <div class="prose-grid">
+          <div>
+            <p>
+              Stellar evolution is a continuous struggle between outward radiation pressure produced by nuclear fusion and inward gravitational collapse. In stars exceeding eight solar masses, successive fusion stages synthesize progressively heavier nuclei?hydrogen into helium, followed by carbon, neon, oxygen, and silicon?forming a concentric, stratified elemental structure.
+            </p>
+            <p>
+              The sequence terminates at Iron-56 (??Fe). Because iron possesses the highest nuclear binding energy per nucleon of any isotope, further fusion is endothermic, absorbing ambient thermal energy rather than liberating it. Deprived of outward radiation support, hydrostatic equilibrium instantly fails.
+            </p>
+          </div>
+          <div>
+            <p>
+              When the degenerate iron core surpasses the Chandrasekhar limit (approximately 1.44 solar masses), relativistic electron degeneracy pressure collapses. Electrons are forced into atomic protons via electron capture, generating an enormous flux of electron neutrinos while converting the entire core into degenerate neutronium.
+            </p>
+            <p>
+              The collapse proceeds at nearly a quarter the speed of light until the core density reaches nuclear saturation (3 ? 10?? g/cm?). The strong nuclear force causes the central core to bounce elastically, driving a violent hydrodynamic shockwave that unbinds the outer stellar envelope and distributes forged heavy elements across the galaxy.
+            </p>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
+    <!-- SECTION 2: BLACK HOLES & SPAGHETTIFICATION -->
+    <section class="topic" id="blackholes">
+      <div class="container">
+        <div class="topic-header">
+          <div class="eyebrow">General Relativity & Singularities</div>
+          <h2>02. Spaghettification & Tidal Metrics</h2>
+        </div>
+
+        <div class="media-frame">
+          <img src="black_hole.jpg" alt="NASA Image: High-resolution visualization of a Kerr black hole accretion disk and photon sphere">
+          <div class="media-caption">
+            Figure 2.0 ? NASA Relativistic Visualization: Accretion disk matter orbiting a spinning Kerr black hole, revealing extreme gravitational lensing, Doppler boosting, and the photon sphere boundary.
+          </div>
+        </div>
+
+        <div class="metric-row">
+          <div class="metric-box">
+            <div class="metric-val">2GM / c?</div>
+            <div class="metric-lbl">Schwarzschild Radius Formula</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-val">0.577 c</div>
+            <div class="metric-lbl">Orbital Speed at Innermost Orbit</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-val">? s</div>
+            <div class="metric-lbl">Time Dilation at Horizon (Observer)</div>
+          </div>
+        </div>
+
+        <div class="prose-grid">
+          <div>
+            <p>
+              When the remnant mass of a collapsed star exceeds the Tolman-Oppenheimer-Volkoff limit (roughly 2.17 solar masses), neutron degeneracy pressure is insufficient to arrest gravitational collapse. Space-time is warped infinitely, forming an event horizon from which neither electromagnetic radiation nor baryonic matter can escape.
+            </p>
+            <p>
+              Inside the Schwarzschild radius, the radial coordinate becomes timelike, meaning that motion toward the central singularity is as inexorable as the forward passage of time itself. The geometry of space-time within this regime is characterized by extreme gravitational gradient differentials.
+            </p>
+          </div>
+          <div>
+            <p>
+              As an extended body descends toward the event horizon, the gravitational acceleration experienced by the radial extremity closest to the singularity markedly exceeds the acceleration experienced by the distant extremity. The differential tidal acceleration is expressed by the gradient tensor:
+            </p>
+            <p style="font-family: monospace; background: #ffffff; padding: 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px;">
+              ?a_radial ? 2 G M ?r / r?
+            </p>
+            <p>
+              Simultaneously, convergent geodesic lines compress the object laterally. The combined forces stretch the body along the radial vector into an infinitesimal filament while compressing its orthogonal axes?a rigorously documented physical phenomenon termed <em>Spaghettification</em>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: THE MULTIVERSE -->
+    <section class="topic" id="multiverse">
+      <div class="container">
+        <div class="topic-header">
+          <div class="eyebrow">Cosmic Inflation & Quantum Topologies</div>
+          <h2>03. The Multiverse & Large-Scale Structure</h2>
+        </div>
+
+        <div class="media-frame">
+          <img src="multiverse.jpg" alt="NASA Image: Hubble Deep Field Survey capturing thousands of early-universe galaxies">
+          <div class="media-caption">
+            Figure 3.0 ? NASA Hubble Deep Field Survey: A minute keyhole into deep cosmic time, revealing thousands of distinct galaxies spanning billions of light-years across the observable cosmic web.
+          </div>
+        </div>
+
+        <div class="metric-row">
+          <div class="metric-box">
+            <div class="metric-val">93 Gly</div>
+            <div class="metric-lbl">Observable Universe Diameter</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-val">10??? s</div>
+            <div class="metric-lbl">Inception of Cosmic Inflation</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-val">10???</div>
+            <div class="metric-lbl">Estimated String Theory Vacua</div>
+          </div>
+        </div>
+
+        <div class="prose-grid">
+          <div>
+            <p>
+              The horizon problem and the observed spatial flatness of the cosmic microwave background strongly validate Alan Guth and Andrei Linde's theory of Cosmic Inflation. In early cosmological epochs, an inflaton scalar field drove exponential, superluminal spatial expansion of space-time by a factor greater than 10?? within 10??? seconds.
+            </p>
+            <p>
+              In eternal chaotic inflation models, quantum fluctuations prevent the scalar field from decaying simultaneously across all spatial patches. While inflation ceased in our local bubble roughly 13.8 billion years ago, it continues uninterrupted elsewhere, ceaselessly spawning isolated pocket universes separated by perpetually expanding de Sitter space.
+            </p>
+          </div>
+          <div>
+            <p>
+              Concurrently, in the Everett Many-Worlds interpretation of quantum mechanics, universal wavefunctions do not undergo wave function collapse during observation. Instead, each decoherence event branches state space into mutually orthogonal, non-interacting parallel histories of reality.
+            </p>
+            <p>
+              When evaluated alongside String Theory's compactified Calabi-Yau manifolds?which permit up to 10??? distinct metastable vacuum states?cosmological theory implies that the fundamental constants of our universe (such as the fine-structure constant and cosmological constant) may not be unique, but merely local realizations within an infinite cosmic landscape.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Clean Footer -->
   <footer>
     <div class="container">
-      <p>About The Skies &copy; 2026 &bull; Synced to <a href="https://github.com/AshKap18/AboutTheSkies" target="_blank">AshKap18/AboutTheSkies</a></p>
+      <p style="color: var(--text-muted); font-size: 13px;">
+        About The Skies &copy; 2026 &bull; Published under the MIT License &bull; Synced with <a href="https://github.com/AshKap18/AboutTheSkies" target="_blank" rel="noopener">AshKap18/AboutTheSkies</a>
+      </p>
     </div>
   </footer>
 
-  <script>
-    gsap.registerPlugin(ScrollTrigger);
-
-    // Dynamic Starfield Canvas
-    const canvas = document.getElementById('starfield');
-    const ctx = canvas.getContext('2d');
-    let stars = [];
-
-    function initStars() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      stars = Array.from({ length: 140 }, () => ({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        radius: Math.random() * 1.5 + 0.3,
-        alpha: Math.random(),
-        speed: Math.random() * 0.015 + 0.005
-      }));
-    }
-
-    function renderStars() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = '#ffffff';
-      for (const star of stars) {
-        star.alpha += star.speed;
-        const opacity = (Math.sin(star.alpha) + 1) / 2;
-        ctx.globalAlpha = opacity * 0.7 + 0.2;
-        ctx.beginPath();
-        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-        ctx.fill();
-      }
-      ctx.globalAlpha = 1;
-      requestAnimationFrame(renderStars);
-    }
-
-    window.addEventListener('resize', initStars);
-    initStars();
-    renderStars();
-
-    // Scroll Animations
-    // 1. Hero Ring expansion
-    gsap.to('#heroRing', {
-      scrollTrigger: {
-        trigger: '#hero',
-        start: 'top top',
-        end: 'bottom top',
-        scrub: true
-      },
-      scale: 3,
-      opacity: 0,
-      ease: 'power1.out'
-    });
-
-    gsap.to('#heroContent', {
-      scrollTrigger: {
-        trigger: '#hero',
-        start: 'top top',
-        end: '50% top',
-        scrub: true
-      },
-      y: -80,
-      opacity: 0,
-      ease: 'power1.out'
-    });
-
-    // 2. Supernova Collapse & Detonation
-    const superTL = gsap.timeline({
-      scrollTrigger: {
-        trigger: '#supernovas',
-        start: 'top 70%',
-        end: 'bottom 50%',
-        scrub: 1
-      }
-    });
-
-    superTL
-      .to('#starCore', { scale: 0.4, filter: 'brightness(2.5)', duration: 0.4 })
-      .to('#starCore', { scale: 1.6, filter: 'brightness(3)', boxShadow: '0 0 90px #fbbf24', duration: 0.6 })
-      .to('#nebulaRing', { scale: 2.2, opacity: 0.8, duration: 0.6 }, '<');
-
-    // 3. Black Hole Rotation & Spaghettification
-    gsap.to('#blackHole', {
-      scrollTrigger: {
-        trigger: '#blackholes',
-        start: 'top bottom',
-        end: 'bottom top',
-        scrub: true
-      },
-      rotation: 360,
-      ease: 'none'
-    });
-
-    gsap.to('#probe', {
-      scrollTrigger: {
-        trigger: '#blackholes',
-        start: 'top 60%',
-        end: 'bottom 50%',
-        scrub: 1
-      },
-      y: 120,
-      scaleY: 4,
-      scaleX: 0.25,
-      opacity: 0.2,
-      ease: 'power2.in'
-    });
-
-    // 4. Multiverse cards fade up
-    gsap.from('.dimension-card', {
-      scrollTrigger: {
-        trigger: '#multiverse',
-        start: 'top 70%'
-      },
-      y: 40,
-      opacity: 0,
-      stagger: 0.15,
-      duration: 0.8,
-      ease: 'power2.out'
-    });
-  </script>
 </body>
 </html>
